@@ -36,3 +36,28 @@ def get_products_by_store(store_name: str):
     if data.empty:
         return {"error": f"No products found from store '{store_name}'"}
     return data.to_dict(orient="records")
+
+# add endpoints to get all values of average_rating, store, main_category, title
+@product_router.get("/values/average_rating")
+def get_all_average_ratings():
+    """Retrieve all unique values of average_rating."""
+    ratings = df_products["average_rating"].dropna().unique().tolist()
+    return {"average_ratings": sorted(ratings)}
+
+@product_router.get("/values/store")
+def get_all_stores():
+    """Retrieve all unique store names."""
+    stores = df_products["store"].dropna().unique().tolist()
+    return {"stores": sorted(stores)}
+
+@product_router.get("/values/main_category")
+def get_all_main_categories():
+    """Retrieve all unique main categories."""
+    categories = df_products["main_category"].dropna().unique().tolist()
+    return {"main_categories": sorted(categories)}
+
+@product_router.get("/values/title")
+def get_all_titles():
+    """Retrieve all unique product titles."""
+    titles = df_products["title"].dropna().unique().tolist()
+    return {"titles": sorted(titles)}

@@ -65,6 +65,7 @@ async def generate_response(prompt: str, context_docs: list, chat_history: list)
     is_clear = clarity_eval.generations[0].text.strip().lower() == "yes"
 
     if is_clear:
-        return main_reply + "\n\n💬 Let me know if you need further assistance or have another question!"
+        return main_reply 
+        # + "\n\n💬 Let me know if you need further assistance or have another question!"
     else:
         return main_reply + "\n\n🤔 Would you like to refine your question or add more detail?"

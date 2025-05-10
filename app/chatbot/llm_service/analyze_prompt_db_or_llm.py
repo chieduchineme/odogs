@@ -82,8 +82,10 @@ Answer:"""
         coll.strip() for coll in raw_result.split(",") if coll.strip() in schemas
     ]
 
+    if not matched_collections:
+        return {"type": "llm"}
+
     return {
         "type": "database",
-        "collections": matched_collections or ["unknown"]
+        "collections": matched_collections
     }
-

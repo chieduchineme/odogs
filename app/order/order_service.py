@@ -70,3 +70,22 @@ def profit_by_gender():
     """Calculate total profit by customer gender."""
     profit_summary = df.groupby("Gender")["Profit"].sum().reset_index()
     return profit_summary.to_dict(orient="records")
+
+# add endpoints to get all values of Customer_Id, Product_Category, Order_Priority
+@order_router.get("/data/values/customer_id")
+def get_all_customer_ids():
+    """Retrieve all unique Customer IDs."""
+    customer_ids = df["Customer_Id"].dropna().unique().tolist()
+    return {"customer_ids": sorted(customer_ids)}
+
+@order_router.get("/data/values/product_category")
+def get_all_product_categories():
+    """Retrieve all unique Product Categories."""
+    product_categories = df["Product_Category"].dropna().unique().tolist()
+    return {"product_categories": sorted(product_categories)}
+
+@order_router.get("/data/values/order_priority")
+def get_all_order_priorities():
+    """Retrieve all unique Order Priorities."""
+    order_priorities = df["Order_Priority"].dropna().unique().tolist()
+    return {"order_priorities": sorted(order_priorities)}
